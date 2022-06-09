@@ -61,7 +61,7 @@ RUN tar -C / -xvf /tmp/swoole-tracker-vx.y.z.tar.gz && \
     rm /tmp/swoole-tracker-vx.y.z.tar.gz
 
 # 添加entrypoint脚本
-RUN printf '#!/bin/sh\n/opt/swoole/script/php/swoole_php /opt/swoole/node-agent/src/node.php &\nphp-fpm $@' > /opt/swoole/entrypoint.sh && \
+RUN printf '#!/bin/sh\n/opt/swoole/script/php/swoole_php /opt/swoole/node-agent/bin/node.php &\nphp-fpm $@' > /opt/swoole/entrypoint.sh && \
     chmod 755 /opt/swoole/entrypoint.sh
 
 # 启用entrypoint脚本（-x方便调试， 可以去掉）
