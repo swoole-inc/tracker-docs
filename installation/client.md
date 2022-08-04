@@ -2,39 +2,30 @@
 
 ## 直接部署(非docker的客户端环境)
 
-### 1. 安装对应的`swoole_tracker`扩展
+### 1. 安装对应的`tracker`扩展
 
 在 `php.ini` 中加入以下配置
 ```ini
 extension=swoole_tracker.so
-
-;打开总开关
-apm.enable=1
-;采样率 例如：100%
-apm.sampling_rate=100
-;开启内存泄漏检测时添加 默认0 关闭状态
-apm.enable_memcheck=1
-
-;v3.3.0版本开始修改为了Zend扩展
 zend_extension=swoole_tracker.so
 tracker.enable=1
 tracker.sampling_rate=100
 tracker.enable_memcheck=1
 ```
->[danger] `enable`为 1 时表示调用统计百分百拦截并上报
-> `sampling_rate`采样率只作用于链路追踪，设置为 100 则表示每次请求都会生成一条 trace 数据
+> `enable`为 `1` 时表示调用统计百分百拦截并上报
+> `sampling_rate`单位为`%`，采样率只作用于链路追踪，设置为 `100` 则表示`100%`采样，也就是每次请求都会生成一条 `Trace` 数据
 
 ### 2. 卸载不兼容扩展
 
-1. xdebug
-2. ioncube loader
-3. zend guard loader
-4. xhprof
-5. swoole_loader （加密后的代码不能进行分析）
+1. `xdebug`
+2. `ioncube loader`
+3. `zend guard loader`
+4. `xhprof`
+5. `swoole_loader` （加密后的代码不能进行分析）
 
 ### 3. 运行agent
 
-在 node-agent 的目录下的命令行中执行 `./deploy_env.sh 127.0.0.1`。(`127.0.0.1`为admin后台的机器ip)
+在 `node-agent` 的目录下的命令行中执行 `./deploy_env.sh 127.0.0.1`。(`127.0.0.1`为admin后台的机器ip)
 
 ### 4. 重启PHP服务
 
